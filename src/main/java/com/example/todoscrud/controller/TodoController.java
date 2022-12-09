@@ -17,7 +17,7 @@ import com.example.todoscrud.model.Todo;
 import com.example.todoscrud.service.TodoService;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200", "https://ngtodolist64.netlify.app" })
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "todos")
 public class TodoController {
 
