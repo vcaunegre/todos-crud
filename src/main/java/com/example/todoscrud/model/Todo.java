@@ -8,12 +8,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "TODOS")
 public class Todo {
     @Id
-    @SequenceGenerator(name = "todo_sequence", allocationSize = 1, sequenceName = "todo_sequence")
-    @GeneratedValue(generator = "todo_sequence", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String description;
     private boolean done;
