@@ -16,13 +16,15 @@ public class Todo {
     private Long id;
     private String title;
     private String description;
+    private boolean done;
 
     public Todo() {
     }
 
-    public Todo(String title, String description) {
+    public Todo(String title, String description, boolean done) {
         this.title = title;
         this.description = description;
+        this.done = done;
     }
 
     public Long getId() {
@@ -35,6 +37,18 @@ public class Todo {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public boolean isDone() {
+        return this.done;
+    }
+
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     public void setTitle(String title) {

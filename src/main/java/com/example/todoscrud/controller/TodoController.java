@@ -34,8 +34,8 @@ public class TodoController {
     }
 
     @PostMapping
-    public void addTodo(@RequestBody Todo todo) {
-        todoService.addTodo(todo);
+    public Todo addTodo(@RequestBody Todo todo) {
+        return todoService.addTodo(todo);
     }
 
     @GetMapping(path = "/{id}")
@@ -49,9 +49,14 @@ public class TodoController {
         return todoService.getTodos();
     }
 
+    @PutMapping(path = "/done/{id}")
+    public List<Todo> changeTodoState(@PathVariable("id") Long id, @RequestBody Todo newTodo) {
+        return todoService.changeTodoDone(id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteTodo(@PathVariable("id") Long id) {
         todoService.deleteTodo(id);
-        return ResponseEntity.ok().body("todo deleted successfully");
+        return ResponseEntity.ok().body(todoService.getTodos());
     }
 }

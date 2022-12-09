@@ -23,8 +23,8 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public void addTodo(Todo todo) {
-        todoRepository.save(todo);
+    public Todo addTodo(Todo todo) {
+        return todoRepository.save(todo);
     }
 
     public void deleteTodo(Long id) {
@@ -32,7 +32,7 @@ public class TodoService {
     }
 
     @Transactional
-    public void updateTodo(Long id, String title, String description) {
+    public Todo updateTodo(Long id, String title, String description) {
         Todo chosenTodo = todoRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Student with id " + id + " does not exist"));
         if (title != null && title.length() > 0 && !Objects.equals(title, chosenTodo.getTitle())) {
@@ -42,6 +42,19 @@ public class TodoService {
                 && !Objects.equals(description, chosenTodo.getDescription())) {
             chosenTodo.setDescription(description);
         }
+        todoRepository.save(chosenTodo);
+        return chosenTodo;
+    }
+
+    public List<Todo> changeTodoDone(Long id) {
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> {
+            return new IllegalStateException("todo doesn't exist with this id.");
+        });
+
+        boolean done = todo.getDone();
+        todo.setDone(!done);
+        todoRepository.save(todo);
+        return todoRepository.findAll();
 
     }
 
