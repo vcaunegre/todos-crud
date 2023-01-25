@@ -54,6 +54,15 @@ public class TodoControllerTest extends AbstractTest {
         }
 
         @Test
+        void shouldGetTodo() throws Exception {
+                String uri = "/api/todos/1";
+                MvcResult mvcResult = mvc.perform(get(uri).contentType(MediaType.APPLICATION_JSON)).andReturn();
+                int status = mvcResult.getResponse().getStatus();
+                Todo todo = super.mapFromJson(mvcResult.getResponse().getContentAsString(), Todo.class);
+                assertEquals(status, 200);
+        }
+
+        @Test
         void shouldCreateTodo() throws Exception {
                 Todo todo = new Todo(3L, "todo 3", "a todo", false);
 
@@ -68,7 +77,7 @@ public class TodoControllerTest extends AbstractTest {
                 String content = mvcResult.getResponse().getContentAsString();
                 Todo todoResult = super.mapFromJson(content, Todo.class);
 
-                assertEquals(todoResult.getDescription(), todo.getDescription());
+                assertThat(todoResult).usingRecursiveComparison().isEqualTo(todo);
                 assertEquals(todoResult.getId(), 3L);
         }
 
