@@ -18,7 +18,7 @@ import com.example.todoscrud.service.TodoService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "todos")
+@RequestMapping(path = "/api/todos")
 public class TodoController {
 
     private final TodoService todoService;

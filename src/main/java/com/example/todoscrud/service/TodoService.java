@@ -3,8 +3,8 @@ package com.example.todoscrud.service;
 import java.util.List;
 import java.util.Objects;
 
-import javax.transaction.Transactional;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.example.todoscrud.model.Todo;
